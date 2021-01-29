@@ -21,14 +21,9 @@ const App = () => {
   const [searchColumns, setSearchColumns] = useState(["FirstName", "LastName"]);
   
   const search = (index) => {
-
-    // const users = index[0] && Object.keys(index[0]);
-    // console.log(users)
-
     const filters = index.filter((res) => 
       searchColumns.some((user) => res[user].toString().toLowerCase().indexOf(query.toLowerCase()) > -1)
     );
-    
     return filters;
   };
 
@@ -38,34 +33,6 @@ const App = () => {
   // To filter with search bar. This working very well.
   const selectedProfiles = search(items).slice(startIndex, startIndex + USER_PER_PAGE);
 
-  // To filter with checkbox
-  // const selectedProfiles = genderFilter(items).slice(startIndex, startIndex + USER_PER_PAGE);
-
-  // const genderFilter = (gender) => {
-  //   // let newFilter;
-  //   if (gender === "male") {
-  //     const newFilter = items.filter(res => res.Gender.toLowerCase() === "male");
-  //     console.log(newFilter);
-  //     // setItems(newState);
-  //     return [...filteredItems, ...newFilter];
-  //   } else if (gender === "female") {
-  //     const newFilter = items.filter(res => res.Gender.toLowerCase() === "female");
-  //     console.log(newFilter);
-  //     // setItems(newState);
-  //     return [...filteredItems, ...newFilter];
-  //   } else if (gender === "others") {
-  //     const newFilter = items.filter(res => res.Gender.toLowerCase() !== "male" && res.Gender.toLowerCase() !== "female");
-  //     console.log(newFilter);
-  //     // setItems(newFilter);
-  //     return [...filteredItems, ...newFilter];
-  //   } else {
-  //     const newFilter = items;
-  //     console.log(newFilter)
-  //     // setItems(newState);
-  //     return [...filteredItems, ...newFilter];
-  //   }    
-  // };
-  
 
   useEffect(() => {
     fetch("https://api.enye.tech/v1/challenge/records")
@@ -99,29 +66,37 @@ const App = () => {
       <div className="py-5 main">
         <div className="topnav">
           <div className="search-container">
-            <form action="#">
-              <input 
-                type="search" 
-                placeholder="Search.." 
-                name="search"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)} />
-              <button type="submit">
-                <FontAwesomeIcon icon={faSearch} />
-              </button>
-            </form>
+            <input 
+              type="search" 
+              placeholder="Search.." 
+              name="search"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)} />
+            <button>
+              <FontAwesomeIcon icon={faSearch} />
+            </button>
           </div>
           <div className="filter">
-            {users && users.map((user) => <label>
-              <input type="checkbox" checked={searchColumns.includes(user)}
-              onChange={(e) => {
-                const checked = searchColumns.includes(user)
-                setSearchColumns(prev => checked 
-                  ? prev.filter(sc => sc !== user)
-                  : [...prev, user])
-              }} />
-              {user} &nbsp;
-            </label>)}
+            <p>Filter your search:</p>
+            {users && users.filter((el) => 
+              el === "FirstName" || 
+              el === "LastName" || 
+              el === "Gender" || 
+              el === "PaymentMethod" || 
+              el === "CreditCardType")
+              .map((user) => 
+                <label>
+                  <input type="checkbox" checked={searchColumns.includes(user)}
+                  onChange={(e) => {
+                    const checked = searchColumns.includes(user)
+                    setSearchColumns(prev => checked 
+                      ? prev.filter(sc => sc !== user)
+                      : [...prev, user])
+                  }} />
+                  {user} &nbsp;
+                </label>
+              )
+            }
           </div>
         </div>
         <div className="regions-grid py-5">

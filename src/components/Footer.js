@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 
 const Footer = ({ totalPages, handleClick, selectedProfiles }) => {
 
   const pages = [...Array(totalPages).keys()].map(num => num + 1);
-  // console.log('Pages: ',selectedProfiles);
 
   return (
     <div className="footer">    
