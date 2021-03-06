@@ -8,7 +8,7 @@ import { faEnvelope, faPhoneVolume } from "@fortawesome/free-solid-svg-icons";
 
 const Profiles = ({ profile }) => {
 
-  // Time
+  // Time formatting
   function formatTime(unix_timestamp) {
     let index = new Date(unix_timestamp * 1000);
     let months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -27,7 +27,6 @@ const Profiles = ({ profile }) => {
 
     return formattedTime;
   }
-  console.log(formatTime(1542306471));
   
   return (
     <div className="card mx-2 regions-subgrid effect">
