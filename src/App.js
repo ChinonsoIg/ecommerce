@@ -12,9 +12,8 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 const App = () => {
   
-  // const [items, setItems] = useState(MySavedSchema);
   const [page, setPage] = useState(1);
-  // const [totalPages, setTotalPages] = useState(Math.ceil(items.length / USER_PER_PAGE));
+  
   const items = MySavedSchema;
   const totalPages = Math.ceil(items.length / USER_PER_PAGE)
 
