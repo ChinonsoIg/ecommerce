@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import './App.css';
 import MySavedSchema from "./My_Saved_Schema.json";
 
@@ -12,9 +12,11 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 const App = () => {
   
-  const [items, setItems] = useState(MySavedSchema);
+  // const [items, setItems] = useState(MySavedSchema);
   const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(Math.ceil(items.length / USER_PER_PAGE));
+  // const [totalPages, setTotalPages] = useState(Math.ceil(items.length / USER_PER_PAGE));
+  const items = MySavedSchema;
+  const totalPages = Math.ceil(items.length / USER_PER_PAGE)
 
   const [query, setQuery] = useState("");
   const [searchColumns, setSearchColumns] = useState(["first_name", "last_name"]);
